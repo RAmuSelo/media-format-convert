@@ -19,6 +19,13 @@ Common conversions ship with sensible presets:
 Any other extension pair also works — it falls back to ffmpeg's defaults for
 that container/codec.
 
+## The problem it solves
+
+`ffmpeg` can convert anything, but nobody remembers the exact flags for a clean
+H.264 MP4 or a 192 kbit/s MP3 — and running it file by file over a folder is
+tedious. This wraps the flags I actually use into named presets and applies them
+to a whole directory in one command.
+
 ## Requirements
 
 * **Python 3.9+**
@@ -108,6 +115,14 @@ The tool discovers matching files, builds an ffmpeg argument vector per file
 `subprocess`. ffmpeg is located with `shutil.which`; if it's missing you get a
 clear error (or a warning in `--dry-run`, since the planned commands are still
 worth inspecting).
+
+## Roadmap
+
+Honest next steps:
+
+- **Recursive** folder scanning (currently top-level only).
+- Parallel conversion with a `--workers` flag for large folders.
+- Per-pair quality flags (e.g. configurable CRF / bitrate).
 
 ## License
 
